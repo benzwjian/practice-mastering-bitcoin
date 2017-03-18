@@ -8,3 +8,6 @@ Writing Javascript code to practice the concepts of [Mastering Bitcoin](https://
 * Generate Address
 * Encode Hex to base58Check
 * Decode base58Check to Hex
+* Wallet  
+  Generate private/public child
+  Encrypted Private Keys
