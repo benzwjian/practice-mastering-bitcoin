@@ -1,0 +1,29 @@
+{
+  "name": "practice-mastering-bitcoin",
+  "version": "1.0.0",
+  "description": "writing javascript code to demonstrate the concepts of Mastering Bitcoin book",
+  "main": "index.js",
+  "scripts": {
+    "test": "standard"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benzwjian/practice-mastering-bitcoin.git"
+  },
+  "keywords": [
+    "bitcoin"
+  ],
+  "author": "benzwjian",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/benzwjian/practice-mastering-bitcoin/issues"
+  },
+  "homepage": "https://github.com/benzwjian/practice-mastering-bitcoin#readme",
+  "devDependencies": {
+    "standard": "^9.0.2"
+  },
+  "dependencies": {
+    "bigi": "^1.4.2",
+    "ecurve": "^1.0.5"
+  }
+}
