@@ -60,19 +60,16 @@ var decodeBase58Check = function (data) {
 
 /* Generate WIF
  * @param payload {Buffer}: payload data
+ * @param isCompressed {boolean}: compress WIF or not
+ * @return result {String}: base58check string
  */
-var wif = function (payload) {
+var wif = function (payload, isCompressed) {
+  if (isCompressed) {
+    var suffix = Buffer.allocUnsafe(1)
+    suffix.writeUInt8(0x01, 0)
+    payload = Buffer.concat([payload, suffix], payload.length + 1)
+  }
   return base58Check(payload, 0x80)
-}
-
-/* Generate compressed WIF
- * @param payload {Buffer}: payload data
- */
-var wifCompressed = function (payload) {
-  var suffix = Buffer.allocUnsafe(1)
-  suffix.writeUInt8(0x01, 0)
-  payload = Buffer.concat([payload, suffix], payload.length + 1)
-  return wif(payload)
 }
 
 /* Generate random number with number of bytes
@@ -107,6 +104,5 @@ module.exports = {
   base58Check: base58Check,
   decodeBase58Check: decodeBase58Check,
   doubleHash: doubleHash,
-  wif: wif,
-  wifCompressed: wifCompressed
+  wif: wif
 }

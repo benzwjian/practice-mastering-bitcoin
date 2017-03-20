@@ -19,13 +19,13 @@ describe('Keys', function () {
   })
 
   it('should be valid WIF private key', function () {
-    var wifPrivateKey = ecpair.generateWIFPrivateKey()
+    var wifPrivateKey = ecpair.generateWIFPrivateKey(false)
     assert(wifPrivateKey, '5J3mBbAH58CpQ3Y5RNJpUKPE62SQ5tfcvU2JpbnkeyhfsYB1Jcn')
   })
 
   it('should be valid compressed WIF private key', function () {
-    var wifCompressedPrivateKey = ecpair.generateWIFCompressedPrivateKey()
-    assert(wifCompressedPrivateKey, 'KxFC1jmwwCoACiCAWZ3eXa96mBM6tb3TYzGmf6YwgdGWZgawvrtJ')
+    var wifPrivateKey = ecpair.generateWIFPrivateKey(true)
+    assert(wifPrivateKey, 'KxFC1jmwwCoACiCAWZ3eXa96mBM6tb3TYzGmf6YwgdGWZgawvrtJ')
   })
 })
 

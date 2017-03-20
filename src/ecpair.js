@@ -18,12 +18,13 @@ Ecpair.prototype.generatePublicKey = function (isCompressed) {
   return publicKey
 }
 
-Ecpair.prototype.generateWIFPrivateKey = function () {
-  return Utils.wif(this.privateKey)
-}
-
-Ecpair.prototype.generateWIFCompressedPrivateKey = function () {
-  return Utils.wifCompressed(this.privateKey)
+/* Generate EC private key in WIF
+ * @param isCompressed {boolean}: compress WIF or not
+ * @return wif {String}: WIF string
+ */
+Ecpair.prototype.generateWIFPrivateKey = function (isCompressed) {
+  var wif = Utils.wif(this.privateKey, isCompressed)
+  return wif
 }
 
 module.exports = Ecpair
