@@ -45,6 +45,23 @@ var base58Check = function (payload, prefix) {
   return base58.encode(payload)
 }
 
+/* Generate WIF
+ * @param payload {Buffer}: payload data
+ */
+var wif = function (payload) {
+  return base58Check(payload, 0x80)
+}
+
+/* Generate compressed WIF
+ * @param payload {Buffer}: payload data
+ */
+var wifCompressed = function (payload) {
+  var suffix = Buffer.allocUnsafe(1)
+  suffix.writeUInt8(0x01, 0)
+  payload = Buffer.concat([payload, suffix], payload.length + 1)
+  return wif(payload)
+}
+
 /* Generate random number with number of bytes
  * @param len {Integer}: number of bytes
  * @return random {Buffer}: the random number
@@ -75,5 +92,7 @@ module.exports = {
   getRandom: getRandom,
   getEcPoints: getEcPoints,
   base58Check: base58Check,
-  doubleHash: doubleHash
+  doubleHash: doubleHash,
+  wif: wif,
+  wifCompressed: wifCompressed
 }

@@ -18,4 +18,12 @@ Ecpair.prototype.generatePublicKey = function (isCompressed) {
   return publicKey
 }
 
+Ecpair.prototype.generateWIFPrivateKey = function () {
+  return Utils.wif(this.privateKey)
+}
+
+Ecpair.prototype.generateWIFCompressedPrivateKey = function () {
+  return Utils.wifCompressed(this.privateKey)
+}
+
 module.exports = Ecpair
