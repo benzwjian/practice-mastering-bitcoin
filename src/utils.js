@@ -24,10 +24,10 @@ var doubleSha256 = function (buffer) {
   return sha256(sha256(buffer))
 }
 
-/* Generate base58check
+/* base58check encoder
  * @param payload {Buffer}: payload data
  * @param prefix {Integer}: 0x00 for bitcoin address, 0x80 for private key
- * @return base58check of payload
+ * @return base58check string
  */
 var base58Check = function (payload, prefix) {
   var version = Buffer.allocUnsafe(1)
@@ -43,6 +43,19 @@ var base58Check = function (payload, prefix) {
   payload = Buffer.concat([payload, checksum], payload.length + 4)
 
   return base58.encode(payload)
+}
+
+/* base58check decoder
+ * @param data {String}: base58check string
+ * @return checksum, payload, version {Object}
+ */
+var decodeBase58Check = function (data) {
+  var buffer = base58.decode(data)
+  return {
+    checksum: buffer.slice(-4).readUInt32LE(),
+    payload: buffer.slice(1, -4).toString('hex'),
+    version: buffer.slice(0, 1).readUInt8()
+  }
 }
 
 /* Generate WIF
@@ -92,6 +105,7 @@ module.exports = {
   getRandom: getRandom,
   getEcPoints: getEcPoints,
   base58Check: base58Check,
+  decodeBase58Check: decodeBase58Check,
   doubleHash: doubleHash,
   wif: wif,
   wifCompressed: wifCompressed
