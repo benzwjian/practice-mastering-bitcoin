@@ -24,6 +24,10 @@ var doubleSha256 = function (buffer) {
   return sha256(sha256(buffer))
 }
 
+var hmac512 = function (buffer, salt) {
+  return crypto.createHmac('sha512', salt).update(buffer)
+}
+
 /* base58check encoder
  * @param payload {Buffer}: payload data
  * @param prefix {Integer}: 0x00 for bitcoin address, 0x80 for private key
@@ -119,6 +123,7 @@ module.exports = {
   getRandom: getRandom,
   getEcPoints: getEcPoints,
   sha256: sha256,
+  hmac512: hmac512,
   base58Check: base58Check,
   decodeBase58Check: decodeBase58Check,
   doubleHash: doubleHash,

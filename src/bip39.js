@@ -1,5 +1,4 @@
 var Utils = require('./utils')
-var pbkdf2 = require('pbkdf2').pbkdf2Sync
 var bip39Words = require('../asset/wordlist/english.json')
 
 /* Generate entropy + checksum
@@ -53,7 +52,7 @@ var getSeed = function (opt) {
   var bEntropy = entropy ? Buffer.from(entropy, 'hex') : Utils.getRandom(len / 8)
   var entropyCheck = generateEntropyCheck(bEntropy)
   var mnemonic = generateMnemonic(entropyCheck)
-  var seed = pbkdf2(Buffer.from(mnemonic), Buffer.from(salt), 2048, 64, 'sha512').toString('hex')
+  var seed = Utils.hmac512(Buffer.from(mnemonic), Buffer.from(salt)).digest('hex')
 
   return seed
 }
