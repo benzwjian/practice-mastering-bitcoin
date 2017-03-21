@@ -98,11 +98,30 @@ var getEcPoints = function (privateKey) {
   return ecPoints
 }
 
+/* Turn bytes into bits
+ * @param bytes {Buffer}: input bytes
+ * @return bits {String}: output bits in string
+ */
+var bytesToBits = function (bytes) {
+  var bits = Array.prototype.slice.call(bytes).map(function (byte) {
+    var bits = byte.toString(2)
+    // prepend '0' until length is 8
+    while (bits.length < 8) {
+      bits = '0' + bits
+    }
+    return bits
+  }).join('')
+
+  return bits
+}
+
 module.exports = {
   getRandom: getRandom,
   getEcPoints: getEcPoints,
+  sha256: sha256,
   base58Check: base58Check,
   decodeBase58Check: decodeBase58Check,
   doubleHash: doubleHash,
-  wif: wif
+  wif: wif,
+  bytesToBits: bytesToBits
 }
