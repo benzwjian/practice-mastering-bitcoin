@@ -38,7 +38,7 @@ var generateMnemonic = function (entropyCheck) {
   return words.join(' ')
 }
 
-/* Generate HD wallet seed
+/* Generate HD wallet root seed
  * @param opt {Object}: contains =>
  *   entropy {String}: input entropy in Hex string
  *   length {Integer}: number bits of input entropy, only for 128, 160, 192, 224 or 256 bits

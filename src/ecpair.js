@@ -2,7 +2,7 @@ var Utils = require('./utils')
 var BigInt = require('bigi')
 
 /* EC pair keys constructor
- * @param privateKey {Buffer}: private key
+ * @param privateKey {Buffer}: private key, 256 bits
  */
 var Ecpair = function (privateKey) {
   this.privateKey = privateKey || Utils.getRandom(32)
