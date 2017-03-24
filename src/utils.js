@@ -8,6 +8,8 @@ var ecurve = require('ecurve')
 var ecurveSecp256k1 = ecurve.getCurveByName('secp256k1')
 var maxBound = ecurveSecp256k1.n
 
+var ecdsa = require('ecdsa')
+
 var sha256 = function (buffer) {
   return crypto.createHash('sha256').update(buffer).digest()
 }
@@ -26,6 +28,14 @@ var doubleSha256 = function (buffer) {
 
 var hmac512 = function (buffer, salt) {
   return crypto.createHmac('sha512', salt).update(buffer)
+}
+
+var ecdsaSign = function (msg, privateKey) {
+  return ecdsa.sign(msg, privateKey)
+}
+
+var ecdsaVerify = function (msg, signature, publicKey) {
+  return ecdsa.verify(msg, signature, publicKey)
 }
 
 /* base58check encoder
@@ -125,6 +135,8 @@ module.exports = {
   sha256: sha256,
   hmac512: hmac512,
   base58Check: base58Check,
+  ecdsaSign: ecdsaSign,
+  ecdsaVerify: ecdsaVerify,
   decodeBase58Check: decodeBase58Check,
   doubleHash: doubleHash,
   wif: wif,
