@@ -38,6 +38,14 @@ var ecdsaVerify = function (msg, signature, publicKey) {
   return ecdsa.verify(msg, signature, publicKey)
 }
 
+var encodeDER = function (r, s) {
+
+}
+
+var decodeDER = function (buffer) {
+
+}
+
 /* base58check encoder
  * @param payload {Buffer}: payload data
  * @param prefix {Integer}: 0x00 for bitcoin address, 0x80 for private key
@@ -135,9 +143,11 @@ module.exports = {
   sha256: sha256,
   hmac512: hmac512,
   base58Check: base58Check,
+  decodeBase58Check: decodeBase58Check,
+  encodeDER: encodeDER,
+  decodeDER: decodeDER,
   ecdsaSign: ecdsaSign,
   ecdsaVerify: ecdsaVerify,
-  decodeBase58Check: decodeBase58Check,
   doubleHash: doubleHash,
   wif: wif,
   bytesToBits: bytesToBits
