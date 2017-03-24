@@ -8,4 +8,29 @@ var Wallet = function (seed) {
   this.masterKeys = Bip32.generateMasterKeys(this.seed)
 }
 
+/* Collect UTXO under an address, maybe a daemon
+ */
+Wallet.prototype.collectUtxoSets = function (address) {
+
+}
+
+/* Spend bitcoin to target address
+ */
+Wallet.prototype.spend = function (toAddress) {
+  sign()
+  broadcast()
+}
+
+/* Sign tx with ECDSA
+ */
+var sign = function (tx) {
+
+}
+
+/* Broadcast tx to bitcoin network
+ */
+var broadcast = function (tx) {
+
+}
+
 module.exports = Wallet
