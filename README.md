@@ -1,5 +1,5 @@
 # practice-mastering-bitcoin
-Writing Javascript code to demonstrate the concepts of [Mastering Bitcoin](https://github.com/benzwjian/bitcoinbook) book.
+Writing Javascript code in Functional Programming to demonstrate the concepts of [Mastering Bitcoin](https://github.com/benzwjian/bitcoinbook) book.
 
 ### Ch04 Keys and Addresses
 * Generate a random number
