@@ -27,7 +27,7 @@ var doubleSha256 = function (buffer) {
 }
 
 var hmac512 = function (buffer, salt) {
-  return crypto.createHmac('sha512', salt).update(buffer)
+  return crypto.createHmac('sha512', salt).update(buffer).digest()
 }
 
 var ecdsaSign = function (msg, privateKey) {
@@ -48,20 +48,13 @@ var decodeDER = function (buffer) {
 
 /* base58check encoder
  * @param payload {Buffer}: payload data
- * @param prefix {Integer}: 0x00 for bitcoin address, 0x80 for private key
  * @return base58check string
  */
-var base58Check = function (payload, prefix) {
-  var version = Buffer.allocUnsafe(1)
-  version.writeUInt8(prefix, 0)
-
-  // prepend version to payload
-  payload = Buffer.concat([version, payload], version.length + payload.length)
-
-  // do double SHA256 to get checksum version+payload
+var base58Check = function (payload) {
+  // do double SHA256 to get checksum of payload
   var checksum = doubleSha256(payload)
 
-  // append first 4 bytes of checksum to version+payload
+  // append first 4 bytes of checksum to payload
   payload = Buffer.concat([payload, checksum], payload.length + 4)
 
   return base58.encode(payload)
