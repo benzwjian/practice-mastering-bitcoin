@@ -19,10 +19,23 @@ var generateMasterKeys = function (seed) {
   }
 }
 
-/* Generate extended key
+/* Generate private/public extended key
+ * @param key {Buffer}: The EC private or public key, 32 bytes
+ * @param chainCode {Buffer}: The chain code
+ * @param isPrivate {boolean}: TRUE for private extended key, FALSE for public extended key
+ * @return extended key in base58check
  */
-var generateExtendedKey = function (ecpair, chainCode, isPrivate) {
-  // TODO
+var generateExtendedKey = function (key, chainCode, isPrivate) {
+  var bVersion = isPrivate ? Buffer.from([0x04, 0x88, 0xAD, 0xE4]) : Buffer.from([0x04, 0x88, 0xB2, 0x1E])
+  var bDepth = Buffer.from([0x00])
+  var bFingerprint = Buffer.from([0x00, 0x00, 0x00, 0x00])
+  var bChildNumber = Buffer.from([0x00, 0x00, 0x00, 0x00])
+  var bChainCode = chainCode
+  var suffix = Buffer.allocUnsafe(1)
+  suffix.writeUInt8(0x00, 0)
+  var bKey = isPrivate ? Buffer.concat([suffix, key], 33) : key
+  var bExtendedKey = Buffer.concat([bVersion, bDepth, bFingerprint, bChildNumber, bChainCode, bKey], 78)
+  return Utils.base58Check(bExtendedKey)
 }
 
 /* Derivate child key
