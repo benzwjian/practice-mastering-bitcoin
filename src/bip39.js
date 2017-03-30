@@ -52,7 +52,7 @@ var getSeed = function (opt) {
   var bEntropy = entropy ? Buffer.from(entropy, 'hex') : Utils.getRandom(len / 8)
   var entropyCheck = generateEntropyCheck(bEntropy)
   var mnemonic = generateMnemonic(entropyCheck)
-  var seed = Utils.hmac512(Buffer.from(mnemonic), Buffer.from(salt)).digest('hex')
+  var seed = Utils.hmac512(Buffer.from(mnemonic), Buffer.from(salt))
 
   return seed
 }
